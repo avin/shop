@@ -7,7 +7,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <header>
-            Сброс пароля
+            Reset password
         </header>
 
         <fieldset>
@@ -23,7 +23,7 @@
 
         <footer>
             <button type="submit" class="btn btn-primary">
-                Отправить ссылку на сброс пароля
+                Send restore password instructions
             </button>
 
         </footer>

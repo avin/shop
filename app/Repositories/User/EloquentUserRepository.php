@@ -28,7 +28,7 @@ class EloquentUserRepository extends EloquentBaseRepository implements UserRepos
      */
     public function update($model, array $input)
     {
-        //Если пароль не указан - убираем его из массива чтоб не менять в БД
+        // Except password if it's empty
         if (!$input['password']) {
             $input = array_except($input, array('password'));
         }
@@ -47,7 +47,7 @@ class EloquentUserRepository extends EloquentBaseRepository implements UserRepos
     }
 
     /**
-     * Сохранить пользовательские настройки
+     * Save user settings
      * @param $model
      * @param $settingName
      * @param $data

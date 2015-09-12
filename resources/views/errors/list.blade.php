@@ -1,7 +1,7 @@
 @if($errors->any())
     <div class="alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h4>Обнаружены проблемы при вводе данных.</h4>
+        <h4>There is a problem.</h4>
         <p>
             <ul>
                 @foreach ($errors->all() as $error)

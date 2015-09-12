@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 
 abstract class EloquentBaseRepository
@@ -107,7 +106,7 @@ abstract class EloquentBaseRepository
     }
 
     /**
-     * Генерация запроса на поиск по регулярке (в имени!)
+     * Generate query to search by regexp string
      * @param $query
      * @param $searchValue
      * @return mixed
@@ -122,7 +121,7 @@ abstract class EloquentBaseRepository
     }
 
     /**
-     * Генерация запроса на сортировку
+     * Generate query to sort
      * @param $query
      * @param $propertyName
      * @param $sortType
@@ -135,31 +134,31 @@ abstract class EloquentBaseRepository
     }
 
     /**
-     * Генерация запроса по поисковым атрибутам
+     * Generate query to search by some attributes
      * @param array $attributes
      * @return mixed
      */
     public function queryByAttributes(array $attributes){
         $query = $this->model;
 
-        //Если есть поисковая строка
+        // If has "search" attribute
         if ($searchValue = array_get($attributes, 'search')){
             $query = $this->queryRegexSearch($query, $searchValue);
         }
 
-        //Включить также удаленные элементы
+        // Get trashed elements
         if(array_get($attributes, 'show_trashed')) {
             $query = $query->withTrashed();
         }
 
-        //Сортируем по имени
+        // Sort by name
         $query = $this->queryOrderBy($query, 'name', 'asc');
 
         return $query;
     }
 
     /**
-     * Получить шаблоны по указанным атрибутам
+     * Get elements
      * @param array $attributes
      * @param int $perPage
      * @param int $page
@@ -169,22 +168,22 @@ abstract class EloquentBaseRepository
      */
     public function get($attributes = [], $perPage = 20, $page = 0)
     {
-        // Выставить страницу пагинации вручную
+        // Set pagination page manually
         if ($page){
             Paginator::currentPageResolver(function() use ($page) {
                 return $page;
             });
         }
 
-        //Составить запрос
+        // Generate query
         $query = $this->queryByAttributes($attributes);
 
-        //Если в атрибутах(!) указан лимит - применяем именно его!
+        // If limit exist - use it
         if($limitAttribute = array_get($attributes, 'limit', 0)){
             $perPage = intval($limitAttribute);
         }
 
-        //Выполнить запрос с пагинацией
+        // Execute query
         return $query->paginate($perPage);
     }
 

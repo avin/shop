@@ -12,7 +12,7 @@ class AuthTest extends TestCase {
      */
 	public function testRegister()
 	{
-        //Регистрация
+        //Register
         $this->visit('/auth/register')
             ->type('Test', 'login')
             ->type('Testname', 'full_name')
@@ -22,7 +22,7 @@ class AuthTest extends TestCase {
             ->press("Register")
             ->seePageIs('/');
 
-        //Проверка создания уч записи
+        //Check if new user record exist
         $this->seeInDatabase('users', [
             'login' => 'Test',
             'full_name' => 'Testname',
@@ -32,15 +32,13 @@ class AuthTest extends TestCase {
 
     public function testLoginAndLogout(){
 
+        //Create new user
         factory(\App\Models\User::class)->create([
             'email' => 'test@email.com',
             'password' => $this->app['hash']->make('secret')
         ]);
 
-
-
-
-        //Проверка входа
+        //Check log in
         $this->visit('/auth/login')
             ->type('test@email.com', 'email')
             ->type('secret', 'password')
@@ -49,7 +47,7 @@ class AuthTest extends TestCase {
 
         $this->assertTrue($this->app['auth']->check());
 
-        //Проверка выхода
+        //Check log out
         $this->visit('/auth/logout')
             ->seePageIs('/');
 

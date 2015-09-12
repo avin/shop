@@ -7,7 +7,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <header>
-            Сброс пароля
+            Reset password
         </header>
 
         <fieldset>
@@ -20,14 +20,14 @@
             </section>
 
             <section>
-                <label class="label">Пароль</label>
+                <label class="label">Password</label>
                 <label class="input"> <i class="icon-append fa fa-user"></i>
                     <input type="password" name="password">
                 </label>
             </section>
 
             <section>
-                <label class="label">Подтверждение пароля</label>
+                <label class="label">Confirm password</label>
                 <label class="input"> <i class="icon-append fa fa-user"></i>
                     <input type="password" name="password_confirmation">
                 </label>
@@ -37,7 +37,7 @@
 
         <footer>
             <button type="submit" class="btn btn-primary">
-                Сбросить пароль
+                Reset password
             </button>
         </footer>
 

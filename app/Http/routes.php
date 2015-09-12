@@ -11,7 +11,7 @@
 |
 */
 
-//Регистрация и авторизация
+//Auth
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
