@@ -42,15 +42,11 @@ class AuthTest extends TestCase {
         $this->visit('/auth/login')
             ->type('test@email.com', 'email')
             ->type('secret', 'password')
-            ->press("logIn")
+            ->press("Login")
             ->seePageIs('/');
-
-        $this->assertSessionHas('name');
 
         //Проверка выхода
         $this->visit('/auth/logout')
             ->seePageIs('/');
-
-        $this->assertSessionHas('name');
     }
 }

@@ -11,7 +11,8 @@
         "jenssegers/mongodb": "^2.1",
         "laracasts/flash": "~1.3",
         "laracasts/utilities": "~2.0",
-        "anahkiasen/former": "4.0.*@dev"
+        "anahkiasen/former": "4.0.*@dev",
+        "laravelcollective/html": "5.1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

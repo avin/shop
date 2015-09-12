@@ -1,64 +1,42 @@
 @extends('layouts.auth')
 
+@section('custom-style')
+    <style>
+        body {
+            padding-top: 20px;
+        }
+    </style>
+@stop
+
 @section('content')
 
+    {!! Former::horizontal_open()
+        ->secure()
+        ->action(action('Auth\AuthController@postRegister'))
+        ->rules(['name' => 'required', 'username' => 'required', 'email' => 'required|email', 'password' => 'required'])
+        ->method('POST') !!}
 
-    <form action="{!! action('Auth\AuthController@postRegister') !!}" method="POST" class="smart-form client-form">
+    {!! Former::legend('Registration') !!}
 
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    @include('errors.list')
 
-        <header>
-            Регистрация
-        </header>
+    {!! Former::text('login')->autofocus() !!}
+    {!! Former::text('full_name') !!}
+    {!! Former::text('email') !!}
 
-        <fieldset>
+    {!! Former::password('password') !!}
+    {!! Former::password('password_confirmation') !!}
 
-            <section>
-                <label class="label">Логин</label>
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                    <input type="text" name="name" value="{{ old('name') }}">
-                </label>
-            </section>
+    <hr>
 
-            <section>
-                <label class="label">Имя пользователя</label>
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                    <input type="text" name="username" value="{{ old('username') }}">
-                </label>
-            </section>
+    {!! Former::actions()
+        ->large_primary_submit('Register')
+        ->large_inverse_reset('Reset') !!}
 
-            <section>
-                <label class="label">Email</label>
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                    <input type="text" name="email" value="{{ old('email') }}">
-                </label>
-            </section>
+    {!! Former::actions(
+            link_to_action('Auth\AuthController@getLogin', $title = 'Already registered? Log in!')
+        ) !!}
 
-            <section>
-                <label class="label">Пароль</label>
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                    <input type="password" name="password">
-                </label>
-            </section>
-
-            <section>
-                <label class="label">Подтверждение пароля</label>
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                    <input type="password" name="password_confirmation">
-                </label>
-            </section>
-
-        </fieldset>
-
-        <footer>
-            <button type="submit" id="register" class="btn btn-primary">Зарегистрироваться</button>
-            <a href="{!! action('Auth\AuthController@getLogin') !!}" class="text-center new-account">
-                Уже есть учетная запись? Войти!
-            </a>
-        </footer>
-
-
-    </form>
-
+    {!! Former::close() !!}
 
 @stop

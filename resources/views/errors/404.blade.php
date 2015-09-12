@@ -3,7 +3,7 @@
 @section ('content')
 
 
-    <h2>Error 503</h2>
+<h2>Error 404</h2>
 
 
 @stop
