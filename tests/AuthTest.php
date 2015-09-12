@@ -14,18 +14,18 @@ class AuthTest extends TestCase {
 	{
         //Регистрация
         $this->visit('/auth/register')
-            ->type('Test', 'name')
-            ->type('Testname', 'username')
+            ->type('Test', 'login')
+            ->type('Testname', 'full_name')
             ->type('test@email.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
-            ->press("register")
+            ->press("Register")
             ->seePageIs('/');
 
         //Проверка создания уч записи
         $this->seeInDatabase('users', [
-            'name' => 'Test',
-            'username' => 'Testname',
+            'login' => 'Test',
+            'full_name' => 'Testname',
             'email' => 'test@email.com',
         ]);
     }
@@ -38,6 +38,8 @@ class AuthTest extends TestCase {
         ]);
 
 
+
+
         //Проверка входа
         $this->visit('/auth/login')
             ->type('test@email.com', 'email')
@@ -45,8 +47,12 @@ class AuthTest extends TestCase {
             ->press("Login")
             ->seePageIs('/');
 
+        $this->assertTrue($this->app['auth']->check());
+
         //Проверка выхода
         $this->visit('/auth/logout')
             ->seePageIs('/');
+
+        $this->assertFalse($this->app['auth']->check());
     }
 }

@@ -6,6 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 class DatabaseSeeder extends Seeder
 {
     /**
+     * @var array
+     */
+    protected $tables = [
+        'users',
+        'roles',
+        'elements'
+    ];
+
+    /**
+     * @var array
+     */
+    protected $seeders = [
+        'UsersCollectionSeeder',
+        'ProductsCollectionSeeder',
+    ];
+
+    /**
      * Run the database seeds.
      *
      * @return void
@@ -14,8 +31,20 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        $this->cleanDatabase();
 
-        Model::reguard();
+        foreach ($this->seeders as $seedClass) {
+            $this->call($seedClass);
+        }
+    }
+
+    /**
+     * Clean out the database for a new seed generation.
+     */
+    private function cleanDatabase()
+    {
+        foreach ($this->tables as $table) {
+            DB::table($table)->truncate();
+        }
     }
 }

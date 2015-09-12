@@ -154,6 +154,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavascriptServiceProvider::class,
         Former\FormerServiceProvider::class,
+        Jenssegers\Mongodb\Auth\PasswordResetServiceProvider::class,
 
     ],
 
