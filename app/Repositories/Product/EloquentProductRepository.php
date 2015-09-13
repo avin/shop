@@ -2,9 +2,11 @@
 
 namespace App\Repositories\Product;
 
+use App\Models\Review;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\EloquentActivateTrait;
 use App\Repositories\EloquentBaseRepository;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -13,13 +15,17 @@ class EloquentProductRepository extends EloquentBaseRepository implements Produc
     use EloquentActivateTrait;
 
     protected $product;
+    protected $review;
     protected $categoryRepository;
+    protected $userRepository;
 
-    public function __construct(Model $product, CategoryRepositoryInterface $categoryRepository)
+    public function __construct(Model $product, Model $review, CategoryRepositoryInterface $categoryRepository, UserRepositoryInterface $userRepository)
     {
         parent::__construct($product);
         $this->product = $product;
+        $this->review = $review;
         $this->categoryRepository = $categoryRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -60,5 +66,18 @@ class EloquentProductRepository extends EloquentBaseRepository implements Produc
         $product->categories()->sync($category_ids);
 
         return $product->save();
+    }
+
+    /**
+     * Update a product
+     *
+     * @param $model
+     * @param array $input
+     * @return object object of model
+     */
+    public function createReview($product, array $reviewData)
+    {
+        $review = new $this->review($reviewData);
+        return $product->reviews()->save($review);
     }
 }

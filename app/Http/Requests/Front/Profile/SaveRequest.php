@@ -1,8 +1,8 @@
-<?php namespace App\Http\Requests\Admin\Category;
+<?php namespace App\Http\Requests\Front\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class SaveRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,7 +12,9 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'login' => 'required',
+            'full_name' => 'required',
+            'password' => 'confirmed'
         ];
     }
 

@@ -24,11 +24,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Admin panel</a>
+            <a class="navbar-brand" href="{!! action('Admin\DashboardController@index') !!}">Admin panel</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="{{ str_contains(Route::currentRouteAction(), ['DashBoardController@']) ? 'active' : '' }}">
+                <li class="{{ str_contains(Route::currentRouteAction(), ['DashboardController@']) ? 'active' : '' }}">
                     <a href="{!! action('Admin\DashboardController@index') !!}">Dashboard</a>
                 </li>
                 <li class="dropdown {{ str_contains(Route::currentRouteAction(), ['ProductController@', 'CategoryController@']) ? 'active' : '' }}">
@@ -43,7 +43,15 @@
                     </ul>
                 </li>
             </ul>
-        </div><!--/.nav-collapse -->
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{!! action('Front\PageController@getHome') !!}">Go to site</a>
+                </li>
+            </ul>
+        </div>
+
+        {{--navbar-right--}}
     </div>
 </nav>
 

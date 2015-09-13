@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\User;
 use App\Repositories\Category\EloquentCategoryRepository;
 use App\Repositories\Product\EloquentProductRepository;
@@ -42,7 +43,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $app->bind('App\Repositories\Product\ProductRepositoryInterface', function ($app) {
             return new EloquentProductRepository(
                 new Product,
-                $app->make('App\Repositories\Category\CategoryRepositoryInterface')
+                new Review,
+                $app->make('App\Repositories\Category\CategoryRepositoryInterface'),
+                $app->make('App\Repositories\User\UserRepositoryInterface')
 
             );
         });

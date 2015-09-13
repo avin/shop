@@ -30,7 +30,7 @@ class DashboardController extends Controller
     public function index()
     {
         $productsCount = $this->productRepository->count();
-        $categoriesCount = $this->productRepository->count();
+        $categoriesCount = $this->categoryRepository->count();
         return view('admin.dashboard.index', compact('productsCount', 'categoriesCount'));
     }
 

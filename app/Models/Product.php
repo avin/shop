@@ -19,9 +19,15 @@ class Product extends BaseModel
      */
     protected $guarded = [];
 
+
     public function categories()
     {
         return $this->belongsToMany('App\Models\Category');
+    }
+
+    public function reviews()
+    {
+        return $this->embedsMany('App\Models\Review');
     }
 
 }

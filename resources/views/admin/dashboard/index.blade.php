@@ -15,7 +15,7 @@
                 </thead>
                 <tr>
                     <td>
-                        {{--{!! Html::linkAction('Admin\CategoriesController@index', $title = 'Categories') !!}--}}
+                        {!! Html::linkAction('Admin\CategoryController@index', $title = 'Categories') !!}
                     </td>
                     <td>{{ $categoriesCount }}</td>
                 </tr>

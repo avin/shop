@@ -28,8 +28,10 @@ class EloquentUserRepository extends EloquentBaseRepository implements UserRepos
      */
     public function update($model, array $input)
     {
+        array_except($input, array('password_confirmation'));
+
         // Except password if it's empty
-        if (!$input['password']) {
+        if (! $input['password']) {
             $input = array_except($input, array('password'));
         }
         $model->fill($input);

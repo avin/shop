@@ -1,8 +1,8 @@
-<?php namespace App\Http\Requests\Admin\Category;
+<?php namespace App\Http\Requests\Front\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreReviewRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,7 +12,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'content' => 'required'
         ];
     }
 

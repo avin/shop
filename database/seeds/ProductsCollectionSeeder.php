@@ -11,14 +11,15 @@ class ProductsCollectionSeeder extends Seeder
 
         //Create random categories
         $categories = [];
-        foreach (range(1,2) as $number){
+        foreach (range(1,5) as $number){
             $categories[] = factory(\App\Models\Category::class)->create([
                 'name' => $faker->word,
+                'description' => $faker->text(200),
             ]);
         }
 
         //Create random products
-        foreach (range(1,2) as $number){
+        foreach (range(1,140) as $number){
             $newProduct = factory(\App\Models\Product::class)->create([
                 'name' => $faker->word,
                 'price' => $faker->randomNumber(3),
