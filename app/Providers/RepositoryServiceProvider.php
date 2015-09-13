@@ -41,7 +41,9 @@ class RepositoryServiceProvider extends ServiceProvider
         // Product
         $app->bind('App\Repositories\Product\ProductRepositoryInterface', function ($app) {
             return new EloquentProductRepository(
-                new Product
+                new Product,
+                $app->make('App\Repositories\Category\CategoryRepositoryInterface')
+
             );
         });
 

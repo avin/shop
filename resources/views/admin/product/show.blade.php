@@ -25,14 +25,11 @@
 
     <hr>
 
-
     <a class="btn btn-success" href="{!! action('Admin\ProductController@edit', [$product->_id]) !!}">
         <i class="fa fa-edit"></i> Edit
     </a>
     <a class="btn btn-default" href="{!! URL::previous() !!}">
         <i class="fa fa-arrow-left"></i> Go back
     </a>
-
-
 
 @stop

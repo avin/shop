@@ -22,13 +22,17 @@
 
     {!! Former::text('name') !!}
     {!! Former::text('price') !!}
-    {!! Former::multiselect('categories')->fromQuery($categories, 'name', 'id') !!}
+    {!! Former::multiselect('category_ids')->label('Categories')->fromQuery($categories, 'name', 'id') !!}
     {!! Former::textarea('description') !!}
 
     <hr>
 
-    {!! Former::actions()
-        ->large_primary_submit(ends_with(Route::currentRouteAction(), '@create') ? 'Create' : 'Save') !!}
+    {!! Former::actions(
+            Former::large_primary_submit(ends_with(Route::currentRouteAction(), '@create') ? 'Create' : 'Save'),
+            (ends_with(Route::currentRouteAction(), '@edit') ? Html::linkAction('Admin\ProductController@delete', 'Delete', [$product->_id], ['class' => 'btn btn-danger']) : '')
+
+        ) !!}
+
 
     {!! Former::close() !!}
 

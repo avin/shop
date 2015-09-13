@@ -2,6 +2,7 @@
 
 @section('content')
 
+    @if($products->count())
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -35,6 +36,9 @@
         <tr></tr>
         </tbody>
     </table>
+    @else
+        <p class="text-muted">There still no one product</p>
+    @endif
 
     <hr>
 

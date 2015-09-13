@@ -24,7 +24,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
     Route::get('/', 'DashboardController@index');
 
     Route::resource('product', 'ProductController');
+    Route::get('product/{id}/delete', ['as' => 'admin.product.delete', 'uses' => 'ProductController@delete']);
+
     Route::resource('category', 'CategoryController');
+    Route::get('category/{id}/delete', ['as' => 'admin.category.delete', 'uses' => 'CategoryController@delete']);
 
 });
 

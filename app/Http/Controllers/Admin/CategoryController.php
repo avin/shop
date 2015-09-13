@@ -4,26 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Http\Requests\Admin\Product\StoreRequest;
-use App\Http\Requests\Admin\Product\UpdateRequest;
+use App\Http\Requests\Admin\Category\StoreRequest;
+use App\Http\Requests\Admin\Category\UpdateRequest;
 use App\Repositories\Category\CategoryRepositoryInterface;
-use App\Repositories\Product\ProductRepositoryInterface;
 use Flash;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
-    protected $productRepository;
     protected $categoryRepository;
 
     function __construct(
-        ProductRepositoryInterface $productRepository,
         CategoryRepositoryInterface $categoryRepository
     )
     {
-        $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
-
     }
 
     /**
@@ -33,8 +28,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->productRepository->get();
-        return view('admin.product.index', compact('products'));
+        $categories = $this->categoryRepository->get();
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -44,8 +39,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = $this->categoryRepository->all();
-        return view('admin.product.edit', compact('categories'));
+        return view('admin.category.edit');
     }
 
     /**
@@ -56,13 +50,13 @@ class ProductController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        if ($this->productRepository->create($request->all())){
+        if ($this->categoryRepository->create($request->all())){
             Flash::success('Successfully stored');
         } else {
             Flash::error('Save error');
         }
 
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -73,12 +67,12 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = $this->productRepository->byId($id);
-        if (! $product){
+        $category = $this->categoryRepository->byId($id);
+        if (! $category){
             abort(404);
         }
 
-        return view('admin.product.show',  compact('product'));
+        return view('admin.category.show',  compact('category'));
     }
 
     /**
@@ -89,14 +83,12 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->productRepository->byId($id);
-        if (! $product){
+        $category = $this->categoryRepository->byId($id);
+        if (! $category){
             abort(404);
         }
 
-        $categories = $this->categoryRepository->all();
-
-        return view('admin.product.edit', compact('product', 'categories'));
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -108,27 +100,27 @@ class ProductController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        $product = $this->productRepository->byId($id);
-        if (! $product){
+        $category = $this->categoryRepository->byId($id);
+        if (! $category){
             abort(404);
         }
 
-        if ($this->productRepository->update($product, $request->all())){
+        if ($this->categoryRepository->update($category, $request->all())){
             Flash::success('Successfully updated');
         } else {
             Flash::error('Save error');
         }
 
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.category.index');
     }
 
     public function delete($id){
-        $product = $this->productRepository->byId($id);
-        if (! $product){
+        $category = $this->categoryRepository->byId($id);
+        if (! $category){
             abort(404);
         }
 
-        return view('admin.product.delete', compact('product'));
+        return view('admin.category.delete', compact('category'));
     }
 
     /**
@@ -139,17 +131,17 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = $this->productRepository->byId($id);
-        if (! $product){
+        $category = $this->categoryRepository->byId($id);
+        if (! $category){
             abort(404);
         }
 
-        if ($this->productRepository->delete($product)){
+        if ($this->categoryRepository->delete($category)){
             Flash::success('Successfully deleted');
         } else {
             Flash::error('Delete error');
         }
 
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.category.index');
     }
 }

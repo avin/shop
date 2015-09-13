@@ -63,7 +63,7 @@ abstract class EloquentBaseRepository
     }
 
     /**
-     * Get single model by slug
+     * Get single model by id
      *
      * @param string slug
      * @return object object of model
@@ -71,6 +71,17 @@ abstract class EloquentBaseRepository
     public function byId($id)
     {
         return $this->model->find($id);
+    }
+
+    /**
+     * Get multi model by ids
+     *
+     * @param string slug
+     * @return object object of model
+     */
+    public function byIds($ids)
+    {
+        return $this->model->whereIn('_id', $ids)->get();
     }
 
     /**
