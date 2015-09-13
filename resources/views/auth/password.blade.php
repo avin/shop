@@ -2,32 +2,22 @@
 
 @section('content')
 
-    <form action="{!! action('Auth\PasswordController@postEmail') !!}" method="POST" class="smart-form client-form">
+    {!! Former::horizontal_open()
+        ->secure()
+        ->action(action('Auth\PasswordController@postEmail'))
+        ->rules(['email' => 'required|email'])
+        ->method('POST') !!}
 
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    {!! Former::legend('Restore password') !!}
 
-        <header>
-            Reset password
-        </header>
+    @include('errors.list')
 
-        <fieldset>
+    {!! Former::text('email')->autofocus() !!}
 
-            <section>
-                <label class="label">E-Mail</label>
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                    <input type="text" name="email" value="{{ old('email') }}">
-                </label>
-            </section>
+    {!! Former::actions()
+        ->large_primary_submit('Send restore password instructions')
+        ->large_inverse_reset('Clear') !!}
 
-        </fieldset>
-
-        <footer>
-            <button type="submit" class="btn btn-primary">
-                Send restore password instructions
-            </button>
-
-        </footer>
-
-    </form>
+    {!! Former::close() !!}
 
 @stop

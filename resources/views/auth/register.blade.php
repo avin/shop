@@ -31,7 +31,7 @@
 
     {!! Former::actions()
         ->large_primary_submit('Register')
-        ->large_inverse_reset('Reset') !!}
+        ->large_inverse_reset('Clear') !!}
 
     {!! Former::actions(
             link_to_action('Auth\AuthController@getLogin', $title = 'Already registered? Log in!')

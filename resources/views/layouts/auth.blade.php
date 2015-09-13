@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/app.css') }}">
 
+    <style>
+        body{
+            padding-top: 20px;
+        }
+    </style>
+
     @yield('custom-style')
 
     <title>Shop</title>

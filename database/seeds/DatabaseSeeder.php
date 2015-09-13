@@ -8,10 +8,11 @@ class DatabaseSeeder extends Seeder
     /**
      * @var array
      */
-    protected $tables = [
+    protected $collections = [
         'users',
         'roles',
-        'elements'
+        'products',
+        'categories',
     ];
 
     /**
@@ -43,8 +44,8 @@ class DatabaseSeeder extends Seeder
      */
     private function cleanDatabase()
     {
-        foreach ($this->tables as $table) {
-            DB::table($table)->truncate();
+        foreach ($this->collections as $collection) {
+            DB::table($collection)->truncate();
         }
     }
 }

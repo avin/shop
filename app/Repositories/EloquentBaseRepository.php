@@ -20,6 +20,15 @@ abstract class EloquentBaseRepository
     }
 
     /**
+     * Count of all elements
+     * @return object  collection of object of model
+     */
+    public function count()
+    {
+        return $this->model->count();
+    }
+
+    /**
      *
      * @return object  collection of object of model
      */

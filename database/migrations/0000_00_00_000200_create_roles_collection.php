@@ -14,7 +14,8 @@ class CreateRolesCollection extends Migration {
 	{
 		Schema::create('roles', function(Blueprint $table)
 		{
-			$table->string('name')->unique();
+			$table->string('name');
+			$table->string('slug')->unique();
 		});
 	}
 

@@ -19,3 +19,12 @@ Route::controllers([
 
 Route::get('/', ['as' => 'home', 'uses' => 'PageController@getHome']);
 
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+
+    Route::get('/', 'DashboardController@index');
+
+    Route::resource('product', 'ProductController');
+    Route::resource('category', 'CategoryController');
+
+});
+

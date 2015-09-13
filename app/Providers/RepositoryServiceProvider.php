@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
+use App\Repositories\Category\EloquentCategoryRepository;
+use App\Repositories\Product\EloquentProductRepository;
 use App\Repositories\User\EloquentUserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,6 +35,20 @@ class RepositoryServiceProvider extends ServiceProvider
         $app->bind('App\Repositories\User\UserRepositoryInterface', function ($app) {
             return new EloquentUserRepository(
                 new User
+            );
+        });
+
+        // Product
+        $app->bind('App\Repositories\Product\ProductRepositoryInterface', function ($app) {
+            return new EloquentProductRepository(
+                new Product
+            );
+        });
+
+        // Category
+        $app->bind('App\Repositories\Category\CategoryRepositoryInterface', function ($app) {
+            return new EloquentCategoryRepository(
+                new Category
             );
         });
     }

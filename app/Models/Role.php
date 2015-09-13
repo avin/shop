@@ -19,4 +19,10 @@ class Role extends BaseModel
      */
     protected $guarded = [];
 
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }
+
+
 }

@@ -14,8 +14,8 @@ class CreateUsersCollection extends Migration {
 	{
 		Schema::create('users', function(Blueprint $table)
 		{
-			$table->string('login')->unique();
-			$table->string('email')->unique();
+			$table->string('login')->index();
+			$table->string('email')->index();
 		});
 	}
 

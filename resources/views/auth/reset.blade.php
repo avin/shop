@@ -2,45 +2,26 @@
 
 @section('content')
 
-    <form action="{!! action('Auth\PasswordController@postReset') !!}" method="POST" class="smart-form client-form">
+    {!! Former::horizontal_open()
+        ->secure()
+        ->action(action('Auth\PasswordController@postReset'))
+        ->rules(['email' => 'required|email', 'password' => 'required', 'password_confirmation' => 'required'])
+        ->method('POST') !!}
 
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    {!! Former::legend('Reset password') !!}
 
-        <header>
-            Reset password
-        </header>
+    @include('errors.list')
 
-        <fieldset>
+    {!! Former::hidden('token')->value($token) !!}
 
-            <section>
-                <label class="label">E-Mail</label>
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                    <input type="text" name="email" value="{{ old('email') }}">
-                </label>
-            </section>
+    {!! Former::text('email')->autofocus() !!}
+    {!! Former::password('password')->label('New password') !!}
+    {!! Former::password('password_confirmation') !!}
 
-            <section>
-                <label class="label">Password</label>
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                    <input type="password" name="password">
-                </label>
-            </section>
+    {!! Former::actions()
+    ->large_primary_submit('Reset password')
+    ->large_inverse_reset('Clear') !!}
 
-            <section>
-                <label class="label">Confirm password</label>
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                    <input type="password" name="password_confirmation">
-                </label>
-            </section>
-
-        </fieldset>
-
-        <footer>
-            <button type="submit" class="btn btn-primary">
-                Reset password
-            </button>
-        </footer>
-
-    </form>
+    {!! Former::close() !!}
 
 @stop

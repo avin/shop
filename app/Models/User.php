@@ -35,4 +35,11 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
      */
     protected $hidden = ['password', 'remember_token'];
 
+    protected $with = ['roles'];
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\Role');
+    }
+
 }

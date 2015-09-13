@@ -19,4 +19,9 @@ class Category extends BaseModel
      */
     protected $guarded = [];
 
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product');
+    }
+
 }
